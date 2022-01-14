@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -40,21 +41,24 @@ class HomePage extends StatelessWidget {
                 ListView(
                   shrinkWrap: true,
                   children: [
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Slider Puzzle',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18,
+                    InkWell(
+                      onTap: () => Modular.to.pushNamed('/slide-puzzle/'),
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Slider Puzzle',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                ),
                               ),
-                            ),
-                            const Icon(Icons.chevron_right)
-                          ],
+                              const Icon(Icons.chevron_right)
+                            ],
+                          ),
                         ),
                       ),
                     ),
