@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:puzzles/modules/slide_puzzle/presentation/controllers/slide_puzzle_controller.dart';
 import 'package:puzzles/modules/slide_puzzle/presentation/widgets/action_bar.dart';

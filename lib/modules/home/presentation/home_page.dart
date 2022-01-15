@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFBFC),
+      backgroundColor: const Color(0xFF8338EC),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -20,17 +20,24 @@ class HomePage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Hello!',
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          'Hello!',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              color: Colors.white),
+                        ),
+                        const SizedBox(width: 16),
+                        Image.asset("assets/images/grinning_face.png")
+                      ],
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'Choose your puzzle to start having fun',
                       style: GoogleFonts.poppins(
+                        color: Colors.white,
                         fontWeight: FontWeight.normal,
                         fontSize: 18,
                       ),
@@ -38,27 +45,45 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 24),
-                ListView(
+                GridView(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, childAspectRatio: 0.8),
                   shrinkWrap: true,
                   children: [
                     InkWell(
                       onTap: () => Modular.to.pushNamed('/slide-puzzle/'),
                       child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Slider Puzzle',
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.all(16),
+                              width: 120,
+                              height: 120,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          "assets/images/slide_puzzle_image.png"))),
+                            ),
+                            ClipRRect(
+                              borderRadius: const BorderRadius.vertical(
+                                  bottom: Radius.circular(4)),
+                              child: Container(
+                                width: double.infinity,
+                                color: const Color(0xFFFF006E),
+                                height: 60,
+                                child: Center(
+                                  child: Text(
+                                    'Slider Puzzle',
+                                    style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 18,
+                                        color: Colors.white),
+                                  ),
                                 ),
                               ),
-                              const Icon(Icons.chevron_right)
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
