@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:mobx/mobx.dart';
-import 'package:puzzles/modules/slide_puzzle/presentation/view_models/slide_object_view_model.dart';
 import 'package:image/image.dart' as image;
+import 'package:puzzles/modules/slide_puzzle/presentation/slide_puzzle_page/view_models/slide_object_view_model.dart';
 
 part 'slide_puzzle_store.g.dart';
 

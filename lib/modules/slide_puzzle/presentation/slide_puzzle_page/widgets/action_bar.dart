@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:puzzles/design_system/puzzle_elevated_button.dart';
-import 'package:puzzles/modules/slide_puzzle/presentation/controllers/slide_puzzle_controller.dart';
+import 'package:puzzles/modules/slide_puzzle/presentation/slide_puzzle_page/controllers/slide_puzzle_controller.dart';
 
-class ActionsBar extends StatelessWidget {
+class ActionsBar extends StatefulWidget {
   final SlidePuzzleController controller;
   final GlobalKey globalKey;
 
@@ -13,6 +13,11 @@ class ActionsBar extends StatelessWidget {
     required this.globalKey,
   }) : super(key: key);
 
+  @override
+  State<ActionsBar> createState() => _ActionsBarState();
+}
+
+class _ActionsBarState extends State<ActionsBar> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -31,10 +36,10 @@ class ActionsBar extends StatelessWidget {
                   activeColor: const Color(0xFFF0B000),
                   thumbColor: const Color(0xFFF0B000),
                   inactiveColor: const Color(0xFFFFDF87),
-                  label: controller.store.sizePuzzle.toString(),
-                  value: controller.store.sizePuzzle.toDouble(),
+                  label: widget.controller.store.sizePuzzle.toString(),
+                  value: widget.controller.store.sizePuzzle.toDouble(),
                   onChanged: (value) =>
-                      controller.store.setPuzzleSize(value.toInt()));
+                      widget.controller.store.setPuzzleSize(value.toInt()));
             }),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +48,8 @@ class ActionsBar extends StatelessWidget {
                   flex: 1,
                   fit: FlexFit.tight,
                   child: PuzzleElevatedButton.primary(
-                      onPressed: () => controller.generatePuzzle(globalKey),
+                      onPressed: () =>
+                          widget.controller.generatePuzzle(widget.globalKey),
                       text: "GENERATE"),
                 ),
                 const SizedBox(width: 16),
@@ -52,9 +58,9 @@ class ActionsBar extends StatelessWidget {
                     flex: 1,
                     fit: FlexFit.tight,
                     child: PuzzleElevatedButton.primary(
-                        onPressed: controller.store.startSlide
+                        onPressed: widget.controller.store.startSlide
                             ? null
-                            : controller.reversePuzzle,
+                            : widget.controller.reversePuzzle,
                         text: "REVERSE"),
                   );
                 }),
@@ -63,7 +69,7 @@ class ActionsBar extends StatelessWidget {
             const SizedBox(height: 16),
             PuzzleElevatedButton.secondary(
               expanded: true,
-              onPressed: controller.clearPuzzle,
+              onPressed: widget.controller.clearPuzzle,
               text: "CLEAR",
             ),
           ],

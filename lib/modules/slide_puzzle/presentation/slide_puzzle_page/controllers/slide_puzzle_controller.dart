@@ -4,10 +4,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:puzzles/modules/slide_puzzle/presentation/stores/slide_puzzle_store.dart';
 
 import 'package:image/image.dart' as image;
-import 'package:puzzles/modules/slide_puzzle/presentation/view_models/slide_object_view_model.dart';
+import 'package:puzzles/modules/slide_puzzle/presentation/slide_puzzle_page/stores/slide_puzzle_store.dart';
+import 'package:puzzles/modules/slide_puzzle/presentation/slide_puzzle_page/view_models/slide_object_view_model.dart';
 
 class SlidePuzzleController {
   final SlidePuzzleStore store;

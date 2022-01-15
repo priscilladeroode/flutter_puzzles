@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:puzzles/commons/render_widget.dart';
-import 'package:puzzles/modules/slide_puzzle/presentation/controllers/slide_puzzle_controller.dart';
+import 'package:puzzles/modules/slide_puzzle/presentation/slide_puzzle_page/controllers/slide_puzzle_controller.dart';
 
 class SlidePuzzleWidget extends StatefulWidget {
+  final SlidePuzzleController controller;
   final Size size;
   final Image imageBckGround;
   final GlobalKey globalKey;
@@ -13,6 +13,7 @@ class SlidePuzzleWidget extends StatefulWidget {
       {Key? key,
       required this.size,
       required this.imageBckGround,
+      required this.controller,
       required this.globalKey})
       : super(key: key);
 
@@ -20,13 +21,12 @@ class SlidePuzzleWidget extends StatefulWidget {
   _SlidePuzzleWidgetState createState() => _SlidePuzzleWidgetState();
 }
 
-class _SlidePuzzleWidgetState
-    extends ModularState<SlidePuzzleWidget, SlidePuzzleController> {
+class _SlidePuzzleWidgetState extends State<SlidePuzzleWidget> {
   Size? size;
 
   @override
   void initState() {
-    controller.store.size = Size(widget.size.width, widget.size.width);
+    widget.controller.store.size = Size(widget.size.width, widget.size.width);
     super.initState();
   }
 
@@ -41,7 +41,7 @@ class _SlidePuzzleWidgetState
             width: widget.size.width,
             height: widget.size.width,
             child: RenderWidget(
-              render: controller.store.slideObjects == null,
+              render: widget.controller.store.slideObjects == null,
               child: RepaintBoundary(
                 key: widget.globalKey,
                 child: SizedBox(
@@ -50,8 +50,8 @@ class _SlidePuzzleWidgetState
                 ),
               ),
               replacement: Stack(
-                children: controller.store.slideObjects != null
-                    ? controller.store.slideObjects!.map(
+                children: widget.controller.store.slideObjects != null
+                    ? widget.controller.store.slideObjects!.map(
                         (slideObject) {
                           if (slideObject.empty) {
                             return Positioned(
@@ -69,9 +69,10 @@ class _SlidePuzzleWidgetState
                                       ...[
                                         Observer(builder: (context) {
                                           return Opacity(
-                                            opacity: controller.store.success
-                                                ? 1
-                                                : 0.3,
+                                            opacity:
+                                                widget.controller.store.success
+                                                    ? 1
+                                                    : 0.3,
                                             child: slideObject.image,
                                           );
                                         })
@@ -88,7 +89,7 @@ class _SlidePuzzleWidgetState
                               left: slideObject.posCurrent.dx,
                               top: slideObject.posCurrent.dy,
                               child: GestureDetector(
-                                onTap: () => controller
+                                onTap: () => widget.controller
                                     .changePos(slideObject.indexCurrent),
                                 child: SizedBox(
                                   width: slideObject.size.width,
@@ -97,19 +98,7 @@ class _SlidePuzzleWidgetState
                                     alignment: Alignment.center,
                                     margin: const EdgeInsets.all(2),
                                     color: Colors.blue,
-                                    child: Stack(
-                                      children: [
-                                        ...[slideObject.image],
-                                        Center(
-                                          child: Text(
-                                            "${slideObject.indexDefault}",
-                                          ),
-                                        ),
-
-                                        // nice one.. lets make it random
-                                      ],
-                                    ),
-                                    // nice one
+                                    child: slideObject.image,
                                   ),
                                 ),
                               ),
